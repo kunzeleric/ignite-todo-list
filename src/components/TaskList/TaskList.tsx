@@ -10,17 +10,21 @@ interface TaskListProps {
 }
 
 export const TaskList = ({ taskList, setTasks }: TaskListProps) => {
-    const [checkedTasks, setCheckedTasks] = useState(0);
+    const [tasksDone, setTasksDone] = useState(0);
 
     const handleDeleteTask = (taskId: string) => {
         const tasksWithoutDeletedOne = taskList.filter((task) => {
+            if (task.isChecked) {
+                setTasksDone((prevCheckedTasks) => prevCheckedTasks - 1);
+            }
             return task.id !== taskId;
         })
         setTasks(tasksWithoutDeletedOne);
+
     }
 
     const handleCheckedTasks = (tasksChecked: number) => {
-        setCheckedTasks((prevTasksChecked) => tasksChecked + prevTasksChecked);
+        setTasksDone((prevTasksChecked) => tasksChecked + prevTasksChecked);
     }
 
 
@@ -34,7 +38,12 @@ export const TaskList = ({ taskList, setTasks }: TaskListProps) => {
                     </div>
                     <div className={styles.taskDone}>
                         <p>Concluídas</p>
-                        <span>{ `${checkedTasks} de ${taskList.length}`}</span>
+                        <span>{
+                            tasksDone !== 0 ?
+                                `${tasksDone} de ${taskList.length}`
+                                : 0
+                        }
+                        </span>
                     </div>
                 </div>
                 {
@@ -47,13 +56,13 @@ export const TaskList = ({ taskList, setTasks }: TaskListProps) => {
                             </p>
                         </div>
                         : taskList.map((task: TaskType) => {
-                            return <Task 
-                                    key={task.id} 
-                                    taskInfo={task} 
-                                    onDeleteTask={handleDeleteTask} 
-                                    taskList={taskList} 
-                                    onTaskCheck={handleCheckedTasks}
-                                    />
+                            return <Task
+                                key={task.id}
+                                taskInfo={task}
+                                onDeleteTask={handleDeleteTask}
+                                taskList={taskList}
+                                onTaskCheck={handleCheckedTasks}
+                            />
 
                         })
                 }

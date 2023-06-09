@@ -17,16 +17,16 @@ interface TaskProp {
 
 export const Task = ({ taskInfo, onDeleteTask, taskList, onTaskCheck }: TaskProp) => {
 
-    const [isChecked, setIsChecked] = useState(taskInfo.isChecked);
+    const [isChecked, setIsChecked] = useState(false);
 
     const handleCheckClick = () => {
         const clickedTask = taskList.find((task) => task.id === taskInfo.id);
         if (!isChecked && clickedTask) {
             setIsChecked(true);
+            clickedTask.isChecked = true;
             onTaskCheck(1);
             const checkedTask = taskList.splice(taskList.indexOf(clickedTask), 1);
             taskList.push(checkedTask[0]);
-            console.log(checkedTask);
         } else {
             setIsChecked(false);
             onTaskCheck(-1);
