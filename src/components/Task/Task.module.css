@@ -12,14 +12,6 @@
     margin-bottom: 0.75rem;
 }
 
-.checked{
-    cursor: pointer;
-}
-
-.unchecked {
-    cursor: pointer;
-}
-
 .checkedDescription {
     color: var(--gray-300);
     overflow-wrap: break-word;
@@ -37,6 +29,61 @@
     font-size: 0.875rem;
 }
 
-.remove {
+.iconCheck{
+    font-size: 28px;
+    color:var(--purple-dark);
     cursor: pointer;
+}
+
+.iconCheck:hover{
+    color: var(--purple);
+}
+
+.iconUncheck{
+    font-size: 28px;
+    color: #4EA8DE;
+    cursor: pointer;
+}
+
+.iconUncheck:hover{
+    color: #1E6F9F;
+}
+
+.iconRemove{
+    font-size: 22px;
+    color: #808080;
+    cursor: pointer;
+}
+
+.iconRemove:hover{
+    color: var(--danger);
+}
+
+@media (max-width: 768px) {
+    .task{
+        width: 90vw;
+    }
+
+    .checkedDescription {
+        font-size: 1rem;
+        width: 80%;
+    }
+    
+    .uncheckedDescription {
+        font-size: 1rem;
+        width: 80%;
+    }
+    
+    .iconCheck{
+        font-size: 32px;
+    }
+    
+    .iconUncheck{
+        font-size: 32px;
+    }
+
+    
+    .iconRemove{
+        font-size: 25px;
+    }
 }

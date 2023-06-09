@@ -32,7 +32,7 @@ export const TaskList = ({ taskList, setTasks }: TaskListProps) => {
     return (
         <main>
             <div className={styles.taskArea}>
-                <div className={styles.header}>
+                <div className={styles.headerMenu}>
                     <div className={styles.taskCreated}>
                         <p>Tarefas criadas</p>
                         <span>{taskList.length}</span>

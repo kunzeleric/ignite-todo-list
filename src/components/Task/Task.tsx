@@ -37,11 +37,13 @@ export const Task = ({ taskInfo, onDeleteTask, taskList, onTaskCheck }: TaskProp
     return (
         <div className={styles.task}>
             {
-                isChecked ? <span className={styles.checked} onClick={handleCheckClick}><CheckCircle color="#8284FA" weight="fill" size={28} /></span>
-                    : <span className={styles.unchecked} onClick={handleCheckClick}><Circle color="#4EA8DE" size={28} /></span>
+                isChecked ? <CheckCircle onClick={handleCheckClick} className={styles.iconCheck} weight="fill" />
+                : <Circle onClick={handleCheckClick} className={styles.iconUncheck} weight="duotone" />
             }
-            <p className={isChecked ? styles.checkedDescription : styles.uncheckedDescription}>{taskInfo.description}</p>
-            <span className={styles.remove} onClick={() => onDeleteTask(taskInfo)}><Trash color="#808080" size={22} /></span>
+            <p className={isChecked ? styles.checkedDescription : styles.uncheckedDescription} >
+                {taskInfo.description}
+            </p>
+            <Trash onClick={() => onDeleteTask(taskInfo)} className={styles.iconRemove} />
         </div>
     )
 }

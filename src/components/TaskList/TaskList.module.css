@@ -10,7 +10,7 @@ main {
     align-items: center;
 }
 
-.header {
+.headerMenu {
     display: flex;
     justify-content: space-between;
     width: 47rem;
@@ -65,3 +65,10 @@ main {
     .taskListEmpty > p {
         line-height: 1.4;
     }
+
+
+@media (max-width: 768px) {
+    .headerMenu {
+        width: 100%;
+    }
+}

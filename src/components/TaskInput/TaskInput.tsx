@@ -46,7 +46,7 @@ export const TaskInput = () => {
                     Criar <PlusCircle size={22} weight="bold" />
                 </button>
             </form>
-            <TaskList taskList={tasks} setTasks={setTasks}/>
+            <TaskList taskList={tasks} setTasks={setTasks} />
         </>
     )
 }
