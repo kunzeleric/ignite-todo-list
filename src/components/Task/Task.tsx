@@ -10,9 +10,9 @@ export interface TaskType {
 
 interface TaskProp {
     taskInfo: TaskType;
-    onDeleteTask: (taskId: string) => void;
+    onDeleteTask: (task: TaskType) => void;
     taskList: TaskType[];
-    onTaskCheck: (totalTasks: number) => void;
+    onTaskCheck: (newTaskCheck: number) => number;
 }
 
 export const Task = ({ taskInfo, onDeleteTask, taskList, onTaskCheck }: TaskProp) => {
@@ -20,14 +20,15 @@ export const Task = ({ taskInfo, onDeleteTask, taskList, onTaskCheck }: TaskProp
     const [isChecked, setIsChecked] = useState(false);
 
     const handleCheckClick = () => {
-        const clickedTask = taskList.find((task) => task.id === taskInfo.id);
-        if (!isChecked && clickedTask) {
+        if (!taskInfo.isChecked) {
+            taskInfo.isChecked = true;
             setIsChecked(true);
-            clickedTask.isChecked = true;
             onTaskCheck(1);
-            const checkedTask = taskList.splice(taskList.indexOf(clickedTask), 1);
+            
+            const checkedTask = taskList.splice(taskList.indexOf(taskInfo), 1);
             taskList.push(checkedTask[0]);
         } else {
+            taskInfo.isChecked = false;
             setIsChecked(false);
             onTaskCheck(-1);
         }
@@ -40,7 +41,7 @@ export const Task = ({ taskInfo, onDeleteTask, taskList, onTaskCheck }: TaskProp
                     : <span className={styles.unchecked} onClick={handleCheckClick}><Circle color="#4EA8DE" size={28} /></span>
             }
             <p className={isChecked ? styles.checkedDescription : styles.uncheckedDescription}>{taskInfo.description}</p>
-            <span className={styles.remove} onClick={() => onDeleteTask(taskInfo.id)}><Trash color="#808080" size={22} /></span>
+            <span className={styles.remove} onClick={() => onDeleteTask(taskInfo)}><Trash color="#808080" size={22} /></span>
         </div>
     )
 }

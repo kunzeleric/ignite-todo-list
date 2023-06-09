@@ -12,19 +12,20 @@ interface TaskListProps {
 export const TaskList = ({ taskList, setTasks }: TaskListProps) => {
     const [tasksDone, setTasksDone] = useState(0);
 
-    const handleDeleteTask = (taskId: string) => {
+    const handleDeleteTask = (taskToBeDeleted: TaskType) => {
         const tasksWithoutDeletedOne = taskList.filter((task) => {
-            if (task.isChecked) {
-                setTasksDone((prevCheckedTasks) => prevCheckedTasks - 1);
+            if (taskToBeDeleted.isChecked === true) {
+                setTasksDone(tasksDone - 1);
             }
-            return task.id !== taskId;
+            return task.id !== taskToBeDeleted.id;
         })
         setTasks(tasksWithoutDeletedOne);
 
     }
 
-    const handleCheckedTasks = (tasksChecked: number) => {
-        setTasksDone((prevTasksChecked) => tasksChecked + prevTasksChecked);
+    const handleCheckedTasks = (taskCheck: number) => {
+        setTasksDone(tasksDone + taskCheck);
+        return tasksDone;
     }
 
 
