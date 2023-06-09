@@ -1,10 +1,28 @@
-import React, { useState } from 'react';
 import styles from './TaskList.module.css';
-import List from '../../assets/notebook.svg'
+import List from '../../assets/notebook.svg';
+import { Task, TaskType } from '../Task/Task';
+import { useState } from 'react';
 
-export const TaskList = () => {
-    const [isTasks, setIsTasks] = useState(false);
-    
+
+interface TaskListProps {
+    taskList: TaskType[];
+    setTasks: (taskList: TaskType[]) => void
+}
+
+export const TaskList = ({ taskList, setTasks }: TaskListProps) => {
+    const [checkedTasks, setCheckedTasks] = useState(0);
+
+    const handleDeleteTask = (taskId: string) => {
+        const tasksWithoutDeletedOne = taskList.filter((task) => {
+            return task.id !== taskId;
+        })
+        setTasks(tasksWithoutDeletedOne);
+    }
+
+    const handleCheckedTasks = (tasksChecked: number) => {
+        setCheckedTasks((prevTasksChecked) => tasksChecked + prevTasksChecked);
+    }
+
 
     return (
         <main>
@@ -12,15 +30,15 @@ export const TaskList = () => {
                 <div className={styles.header}>
                     <div className={styles.taskCreated}>
                         <p>Tarefas criadas</p>
-                        <span>0</span>
+                        <span>{taskList.length}</span>
                     </div>
                     <div className={styles.taskDone}>
                         <p>Concluídas</p>
-                        <span>0</span>
+                        <span>{ `${checkedTasks} de ${taskList.length}`}</span>
                     </div>
                 </div>
                 {
-                    !isTasks ?
+                    taskList.length === 0 ?
                         <div className={styles.taskListEmpty}>
                             <img src={List} alt="Task list icon" />
                             <p>
@@ -28,10 +46,19 @@ export const TaskList = () => {
                                 Crie tarefas e organize seus itens a fazer
                             </p>
                         </div>
-                        : null
-                }
+                        : taskList.map((task: TaskType) => {
+                            return <Task 
+                                    key={task.id} 
+                                    taskInfo={task} 
+                                    onDeleteTask={handleDeleteTask} 
+                                    taskList={taskList} 
+                                    onTaskCheck={handleCheckedTasks}
+                                    />
 
+                        })
+                }
             </div>
         </main>
     )
 }
+
