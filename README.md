@@ -6,8 +6,7 @@ As a challenged proposed by Rocketseat, this project was meant to practice React
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+![toDoList](https://github.com/kunzeleric/ignite-todo-list/assets/114115220/3f6d9020-0f61-4d60-bb6a-cf55f2169a16)
 
 ## Technologies
 
