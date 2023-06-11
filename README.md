@@ -3,6 +3,7 @@
 
 As a challenged proposed by Rocketseat, this project was meant to practice React and its hooks, alternatively with Typescript (which I managed to accomplish!!!). It's a to-do list that lets the user list his tasks and either check or remove them.
 
+LINK Netlify: https://tasklist-todos-ignite.netlify.app/
 
 ## Screenshots
 
